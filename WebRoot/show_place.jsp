@@ -1,4 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,7 +10,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'index.jsp' starting page</title>
+    <title>My JSP 'login_admin_fail.jsp' starting page</title>
+    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -18,9 +20,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+
   </head>
   
   <body>
-   <a href="login_admin.jsp">管理员登录</a><br>
+<s:debug/>
+<%-- <s:form action="doubleselectTag">
+       <s:doubleselect label="请选择所在省市" name="provice" list="place"
+        listKey="String" listValue="name" doubleList="cityMap.get(top.id)" doubleListKey="id"
+        doubleListValue="name" doubleName="city"
+        headerValue="----请选择----" emptyOption="true" />
+  </s:form> --%>
+ <%--  <s:form name="form1">
+  <s:doubleselect label="地域" list="#place.keySet()" name="city"
+   doubleName="zone" formName="form1" doubleList="#place[top]" />
+</s:form> --%>
   </body>
 </html>

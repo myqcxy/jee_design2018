@@ -1,4 +1,5 @@
-<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ page language="java" pageEncoding="utf-8" contentType="text/html;charset=utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -9,7 +10,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'index.jsp' starting page</title>
+    <title>My JSP 'login.jsp' starting page</title>
+    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -18,9 +20,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+<s:head/>
   </head>
   
   <body>
-   <a href="login_admin.jsp">管理员登录</a><br>
+  <center>
+  <s:debug/>
+    <s:form action="checkAdmin" method ="post">
+       <s:textfield name="admin.aname"  label="用户名" requiredLabel="true" requiredPosition="left"/>
+       <s:password name="admin.apass" label="密码" errorPosition="bottom"/>
+       <s:submit value="登录" />
+    </s:form>
+    </center>
   </body>
 </html>
+
