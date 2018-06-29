@@ -1,14 +1,15 @@
 package bean;
 
 public class User {
-	String username;
+	String uname;
 	String uid;
 	String upass;
-	public String getUsername() {
-		return username;
+	
+	public String getUname() {
+		return uname;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+	public void setUname(String uname) {
+		this.uname = uname;
 	}
 	public String getUid() {
 		return uid;
