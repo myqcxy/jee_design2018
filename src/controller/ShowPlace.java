@@ -9,7 +9,6 @@ import com.opensymphony.xwork2.ActionSupport;
 
 import bean.City;
 import bean.Zone;
-import dao.PlaceDao;
 
 
 public class ShowPlace extends ActionSupport {

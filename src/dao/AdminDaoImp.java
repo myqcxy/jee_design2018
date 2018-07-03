@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import bean.*;
-import bean.Place;
 import db.DBConnection;
 
 public class AdminDaoImp implements AdminDao {
@@ -34,15 +33,16 @@ public class AdminDaoImp implements AdminDao {
 	}
 
 	@Override
-	public void addPlace(Place p) throws Exception {
+	public void addPlace(City city) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void editPlace(Place p) throws Exception {
+	public void editPlace(Zone zone) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
+
 
 }

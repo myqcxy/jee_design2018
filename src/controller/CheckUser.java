@@ -1,5 +1,8 @@
 package controller;
 
+import java.util.Map;
+
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import bean.Admin;
@@ -18,6 +21,8 @@ public class CheckUser extends ActionSupport {
 	public String execute() throws Exception {
 		UserDao ud = new UserDaoImp(); 
 		if(ud.isLagel(user)){
+			 Map session=ActionContext.getContext().getSession();
+			   session.put("uname", user.getUname());
 			return SUCCESS;
 		}
 		else return "fail";

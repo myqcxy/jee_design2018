@@ -17,6 +17,18 @@
        <result name="input">/login_admin.jsp</result>
      </action>
      
+     <action name="collect" class="controller.RentHouse" method="collect">
+       <result>/collect_suc.jsp</result>
+       <result name="fail">/login_admin_fail.jsp</result>
+       <result name="input">/login_admin.jsp</result>
+     </action>
+     
+     <action name="myCollection" class="controller.RentHouse" method="myCollection">
+       <result>/myCollection.jsp</result>
+       <result name="fail">/login_admin_fail.jsp</result>
+       <result name="input">/login_admin.jsp</result>
+     </action>
+     
       <action name="addHouse" class="controller.RentHouse" method="addHouse">
        <result>/house_add_suc.jsp</result>
       

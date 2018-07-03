@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -23,12 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   </head>
   
-  <body><center>
-  登录成功！你好！
-    <s:property value="user.uname"/><s:debug/><br><br>
-    <a href="rentHouse">我要租房</a><br><br>
-    <a href="house_add.jsp">我要提供租房</a><br><br>
-    <a href="myCollection">我的收藏</a>
-    </center>
+  <body>
+   <center>房屋收藏成功！等待租客来住......</center>
   </body>
 </html>

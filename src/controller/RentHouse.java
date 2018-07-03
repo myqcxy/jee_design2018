@@ -2,7 +2,9 @@ package controller;
 
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import bean.House;
@@ -38,7 +40,21 @@ public class RentHouse extends ActionSupport {
 		return "fail";
 		
 	}
+	public String collect() throws SQLException{
+		Map session = ActionContext.getContext().getSession();
+		String uname = (String) session.get("uname");
+		if(new HouseDao().collect(uname, house.getId())){
+			return SUCCESS;
+		}
+		return "fail";
+	}
 	
+	/**
+	 * Œ“µƒ ’≤ÿ
+	 */
+	 public String myCollection(){
+		 return SUCCESS;
+	 }
 	@Override
 	public String execute() throws Exception {
 		houses = new HouseDao().getAllHouse();

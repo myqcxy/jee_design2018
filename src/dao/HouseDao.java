@@ -54,4 +54,14 @@ public class HouseDao {
 		ps.close();
 		return issuc ;
 	}
+
+	public boolean collect(String uname, int id) throws SQLException {
+		String sql = "insert into collect(uname,hid) values(?,?)";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, uname);
+		ps.setInt(2, id);
+		int row = ps.executeUpdate();
+		ps.close();
+		return row>0;
+	}
 }
