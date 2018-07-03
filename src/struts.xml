@@ -11,6 +11,17 @@
        <result name="fail">/login_admin_fail.jsp</result>
        <result name="input">/login_admin.jsp</result>
      </action>
+     <action name="rentHouse" class="controller.RentHouse">
+       <result>/show_house.jsp</result>
+       <result name="fail">/login_admin_fail.jsp</result>
+       <result name="input">/login_admin.jsp</result>
+     </action>
+     
+      <action name="addHouse" class="controller.RentHouse" method="addHouse">
+       <result>/house_add_suc.jsp</result>
+      
+     </action>
+     
       <action name="checkUser" class="controller.CheckUser">
        <result>/login_user_suc.jsp</result>
        <result name="fail" >/login_user_fail.jsp</result>

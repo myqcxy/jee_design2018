@@ -5,7 +5,7 @@ import java.util.List;
 public class Place {
 	Integer pid;
 	String city;
-	List zone;
+	String zone;
 	public Integer getPid() {
 		return pid;
 	}
@@ -18,11 +18,12 @@ public class Place {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public List getZone() {
+	public String getZone() {
 		return zone;
 	}
-	public void setZone(List zone) {
+	public void setZone(String zone) {
 		this.zone = zone;
 	}
+	
 	
 }

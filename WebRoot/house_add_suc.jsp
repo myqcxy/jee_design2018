@@ -23,8 +23,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-   <a href="showPlace">地点信息</a><br>
-      <a>地点信息</a><br>
-        <a>地点信息</a><br><br>
+   <center>房屋添加成功！等待租客来住......</center>
   </body>
 </html>

@@ -23,11 +23,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
   </head>
   
-  <body>
+  <body><center>
   登录成功！你好！<s:debug/>
-    <s:property value="user.uname"/>
-   <a href="show_place.jsp">地点信息</a><br>
-      <a>地点信息</a><br>
-        <a>地点信息</a><br><br>
+    <s:property value="user.uname"/><br>
+    <a href="rentHouse">我要租房</a><br>
+    <a href="house_add.jsp">我要提供租房</a>
+    </center>
   </body>
 </html>
