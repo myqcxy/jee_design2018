@@ -43,10 +43,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <td><s:property value="#row.description"/>
       <td><s:property value="#row.phone"/>
       <td>
-      <s:url var="collectUrl" action="collect" >
+      <s:url var="rmCollectUrl" action="rmCollection" >
          <s:param name="house.id" value="#row.id"/>
       </s:url>
-      <a href="${collectUrl}">收藏</a>
+      <a href="${rmCollectUrl}">取消收藏</a>
       
       <!-- <a href="" onClick="return readyDel() --><!-- ;">del</a> -->
     </s:iterator>

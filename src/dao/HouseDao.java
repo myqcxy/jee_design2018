@@ -64,4 +64,52 @@ public class HouseDao {
 		ps.close();
 		return row>0;
 	}
+	public List<House> getMyCollection(String uname) throws SQLException {
+		String sql = "select * from collect where uname=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		List<House> houses = new ArrayList<House>();
+		ps.setString(1, uname);
+		try (ResultSet rs = ps.executeQuery();) {
+			while(rs.next()){
+				int hid = rs.getInt("hid");
+				House h = getHouseById(hid);
+				houses.add(h);
+			}
+		}
+		return houses;
+	}
+	public House getHouseById(int hid) throws SQLException {
+		String sql = "select * from house where hid=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, hid);
+		House h = new House();
+		try (ResultSet rs = ps.executeQuery();) {
+			while(rs.next()){
+
+				
+				h.setId(rs.getInt("hid"));
+				h.setCity(new City(0,rs.getString("city")));
+				h.setZone(new Zone(0,rs.getString("zone")));
+				h.setArea(rs.getInt("area"));
+				h.setDescription(rs.getString("description"));
+				h.setMode(rs.getString("mode"));
+				h.setPhone(rs.getString("phone"));
+				h.setRent(rs.getFloat("rent"));
+				h.setRoom(rs.getString("room"));
+			}
+		}
+		ps.close();
+		return h;
+	}
+	public boolean rmCollection(int id, String uname) throws SQLException {
+		String sql="delete from collect where uname=? and hid=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, uname);
+		ps.setInt(2, id );
+		int row = ps.executeUpdate();
+		ps.close();
+
+		
+		return row>0;
+	}
 }

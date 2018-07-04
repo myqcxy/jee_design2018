@@ -22,6 +22,11 @@
        <result name="fail">/login_admin_fail.jsp</result>
        <result name="input">/login_admin.jsp</result>
      </action>
+      <action name="rmCollection" class="controller.RentHouse" method="rmCollection">
+       <result type="chain">myCollection</result>
+       <result name="fail">/login_admin_fail.jsp</result>
+       <result name="input">/login_admin.jsp</result>
+     </action>
      
      <action name="myCollection" class="controller.RentHouse" method="myCollection">
        <result>/myCollection.jsp</result>

@@ -14,9 +14,6 @@ import dao.HouseDao;
 public class RentHouse extends ActionSupport {
 	List<House> houses;
 	House house;
-	
-
-	
 
 	public House getHouse() {
 		return house;
@@ -50,9 +47,28 @@ public class RentHouse extends ActionSupport {
 	}
 	
 	/**
-	 * 我的收藏
+	 * 将房屋从我的收藏中移除
+	 * @throws SQLException 
+	 * 
 	 */
-	 public String myCollection(){
+	public String rmCollection() throws SQLException{
+		Map session = ActionContext.getContext().getSession();
+		String uname = (String) session.get("uname");
+	
+		if(new HouseDao().rmCollection(house.getId(),uname)){
+			return SUCCESS;
+			
+		}
+		return "fail";
+	}
+	/**
+	 * 我的收藏
+	 * @throws SQLException 
+	 */
+	 public String myCollection() throws SQLException{
+		 Map session = ActionContext.getContext().getSession();
+			String uname = (String) session.get("uname");
+		 houses = new HouseDao().getMyCollection(uname);
 		 return SUCCESS;
 	 }
 	@Override
