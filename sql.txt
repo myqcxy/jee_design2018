@@ -61,3 +61,7 @@ uname varchar(50) foreign key references user(uname),
 hid INTEGER foreign key references house(hid),
 PRIMARY KEY (uname,hid)
 )
+
+
+模糊查询select * from house where city like '%郑%' or zone like '%高新%'
+删除某列alter table house drop column uid 

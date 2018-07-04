@@ -38,7 +38,20 @@
        <result>/house_add_suc.jsp</result>
       
      </action>
+     <action name="searchHouse" class="controller.RentHouse" method="searchHouse">
+       <result>/show_house.jsp</result>
+      
+     </action>
+     <action name="delMyHouse" class="controller.RentHouse" method="delMyHouse">
+       <result type="chain">myHouse</result>
+      
+     </action>
      
+     <action name="myHouse" class="controller.RentHouse" method="myHouse">
+       <result>/myHouse.jsp</result>
+      
+     </action>
+
       <action name="checkUser" class="controller.CheckUser">
        <result>/login_user_suc.jsp</result>
        <result name="fail" >/login_user_fail.jsp</result>

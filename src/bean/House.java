@@ -13,7 +13,14 @@ public class House {
 	String description;//描述
 	String phone;//联系电话
 	List<String> photoUrl;//图片链接
+	String state;
 	
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
 	public City getCity() {
 		return city;
 	}

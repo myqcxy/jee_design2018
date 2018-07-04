@@ -31,11 +31,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	String phone; -->
   <body><center>
 <s:debug/>
-	<s:form action="searchHouse" method ="post">
-		<s:textfield name="keyInfo" label="筛选条件"/>
-		<s:submit value="搜索"/>
-	</s:form>
-	 <table border="1" style="border:1px solid green"><tr><td>城市<td>区<td>厅室<td>面积（平米）<td>出租方式<td>租金<td>描述<td>电话<td>action
+
+	 <table border="1" style="border:1px solid green"><tr><td>城市<td>区<td>厅室<td>面积（平米）<td>出租方式<td>租金<td>描述<td>电话<td>状态<td>action
     <s:iterator value="houses" var="row">
     <tr>
     	<td><s:property value="#row.city.name"/>
@@ -46,19 +43,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <td><s:property value="#row.rent"/>
       <td><s:property value="#row.description"/>
       <td><s:property value="#row.phone"/>
+      <td><s:property value="#row.state"/>
       <td>
       <s:url var="collectUrl" action="collect" >
          <s:param name="house.id" value="#row.id"/>
       </s:url>
-      <a href="${collectUrl}">收藏</a>
+      <a href="${collectUrl}">修改</a>
       
-      <td>
-      <s:url var="rentUrl" action="rentHouse" >
+    <s:url var="delUrl" action="delMyHouse" >
          <s:param name="house.id" value="#row.id"/>
       </s:url>
-      <a href="${rentUrl}">收藏</a>
-      <!-- <a href="" onClick="return readyDel() --><!-- ;">del</a> -->
+      <a href="${delUrl}" onClick="return readyDel();">删除</a>
     </s:iterator>
     </table></center>
+    <script>
+      function readyDel(){
+        return confirm("是否真的删除?");
+      }
+    </script>
   </body>
 </html>

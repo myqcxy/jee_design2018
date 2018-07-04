@@ -112,4 +112,71 @@ public class HouseDao {
 		
 		return row>0;
 	}
+	public boolean rentHouse(String uname, int id) {
+		
+		return false;
+	}
+	public List<House> getHouseBySearch(String keyInfo) throws SQLException {
+		keyInfo = "%" + keyInfo + "%";
+		List<House> houses = new ArrayList<House>();
+		String sql = "select * from house where (city like ? or zone like ?" + 
+						"or mode like ? or description like ?) and state!=3";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, keyInfo);
+		ps.setString(2, keyInfo);
+		ps.setString(3, keyInfo);
+		ps.setString(4, keyInfo);
+		try (ResultSet rs = ps.executeQuery();) {
+			while(rs.next()){
+
+				House h = new House();
+				h.setId(rs.getInt("hid"));
+				h.setCity(new City(0,rs.getString("city")));
+				h.setZone(new Zone(0,rs.getString("zone")));
+				h.setArea(rs.getInt("area"));
+				h.setDescription(rs.getString("description"));
+				h.setMode(rs.getString("mode"));
+				h.setPhone(rs.getString("phone"));
+				h.setRent(rs.getFloat("rent"));
+				h.setRoom(rs.getString("room"));
+				houses.add(h);
+			}
+		}
+		ps.close();
+		return houses;
+	}
+	public List<House> getMyHouse(String uname) throws SQLException {
+		List<House> houses = new ArrayList<House>();
+		String sql = "select * from house where uname=? and state!=3";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, uname);
+		try (ResultSet rs = ps.executeQuery();) {
+			while(rs.next()){
+
+				House h = new House();
+				h.setId(rs.getInt("hid"));
+				h.setCity(new City(0,rs.getString("city")));
+				h.setZone(new Zone(0,rs.getString("zone")));
+				h.setArea(rs.getInt("area"));
+				h.setDescription(rs.getString("description"));
+				h.setMode(rs.getString("mode"));
+				h.setPhone(rs.getString("phone"));
+				h.setRent(rs.getFloat("rent"));
+				h.setRoom(rs.getString("room"));
+				int s = rs.getInt("state");
+				h.setState(0==s?"´ý³ö×â":"³ö×âÖÐ");
+				houses.add(h);
+			}
+		}
+		ps.close();
+		return houses;
+	}
+	public boolean delMyHouse(int id) throws SQLException {
+		String sql = "UPDATE house SET state=3  where hid=?";
+		System.out.println(id);
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, id);
+		int row = ps.executeUpdate();
+		return row>0;
+	}
 }

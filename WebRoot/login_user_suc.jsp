@@ -28,7 +28,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <s:property value="user.uname"/><s:debug/><br><br>
     <a href="rentHouse">我要租房</a><br><br>
     <a href="house_add.jsp">我要提供租房</a><br><br>
-    <a href="myCollection">我的收藏</a>
+    <a href="myCollection">我的收藏</a><br><br>
+     <a href="myHouse">我的房屋</a><br><br>
     </center>
   </body>
 </html>
