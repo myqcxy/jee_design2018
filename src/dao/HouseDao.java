@@ -179,4 +179,21 @@ public class HouseDao {
 		int row = ps.executeUpdate();
 		return row>0;
 	}
+	public boolean updateHouse(House house) throws SQLException {
+		String sql = "update house set city=?,zone=?,room=?,"+""
+				+ "area=?,mode=?,rent=?,description=?,phone=? where hid=?";
+						PreparedStatement ps = con.prepareStatement(sql);
+						ps.setString(1, house.getCity().getName());
+						ps.setString(2, house.getZone().getName());
+						ps.setString(3, house.getRoom());
+						ps.setInt(4, house.getArea());
+						ps.setString(5, house.getMode());
+						ps.setFloat(6, house.getRent());
+						ps.setString(7, house.getDescription());
+						ps.setString(8, house.getPhone());
+						ps.setInt(9, house.getId());
+						boolean issuc = ps.executeUpdate()>0;
+						ps.close();
+						return issuc ;
+	}
 }

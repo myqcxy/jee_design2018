@@ -47,6 +47,15 @@
       
      </action>
      
+     <action name="updateHouse" class="controller.RentHouse" method="updateHouse">
+       <result type="chain">myHouse</result>
+      
+     </action>
+     
+     <action name="editHouse" class="controller.RentHouse" method="editHouse">
+       <result>/editHouse.jsp</result>
+      
+     </action>
      <action name="myHouse" class="controller.RentHouse" method="myHouse">
        <result>/myHouse.jsp</result>
       

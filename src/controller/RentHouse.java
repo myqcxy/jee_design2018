@@ -105,7 +105,16 @@ public class RentHouse extends ActionSupport {
 		}
 		return "fail";
 	}
-
+	public String updateHouse() throws SQLException{
+		if(new HouseDao().updateHouse(house)){
+			return SUCCESS;
+		}
+		return "fail";
+	}
+	public String editHouse() throws SQLException{
+		house = new HouseDao().getHouseById(house.getId());
+		return SUCCESS;
+	}
 	public String searchHouse() throws SQLException {
 		houses = new HouseDao().getHouseBySearch(keyInfo);
 		return SUCCESS;

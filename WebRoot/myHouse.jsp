@@ -45,10 +45,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <td><s:property value="#row.phone"/>
       <td><s:property value="#row.state"/>
       <td>
-      <s:url var="collectUrl" action="collect" >
+      <s:url var="editUrl" action="editHouse" >
          <s:param name="house.id" value="#row.id"/>
       </s:url>
-      <a href="${collectUrl}">修改</a>
+      <a href="${editUrl}">修改</a>
       
     <s:url var="delUrl" action="delMyHouse" >
          <s:param name="house.id" value="#row.id"/>
