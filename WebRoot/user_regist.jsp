@@ -25,8 +25,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <center>
-  <s:debug/>
-    <s:form action="addUser" method ="post">
+  <s:debug/><a href="index.jsp">返回主页面</a><br><a href="login_user.jsp">已有账户，点击登录</a>
+      <s:form action="addUser" method ="post">
        <s:textfield name="user.uname"  label="用户名" requiredLabel="true" requiredPosition="left"/>
        <s:password name="user.upass" label="密码" errorPosition="bottom"/>
        <s:submit value="注册" />

@@ -35,6 +35,10 @@
      </action>
      
       <action name="addHouse" class="controller.RentHouse" method="addHouse">
+       <result type="chain">savePhoto</result>
+      
+     </action>
+     <action name="savePhoto" class="controller.SavePhoto">
        <result>/house_add_suc.jsp</result>
       
      </action>

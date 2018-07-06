@@ -1,11 +1,10 @@
-package controller;
+package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import bean.User;
-import dao.UserDao;
 import db.DBConnection;
 
 public class UserDaoImp implements UserDao {

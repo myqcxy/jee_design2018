@@ -20,12 +20,14 @@ public class CheckUser extends ActionSupport {
 	@Override
 	public String execute() throws Exception {
 		UserDao ud = new UserDaoImp(); 
-		if(ud.isLagel(user)){
-			 Map session=ActionContext.getContext().getSession();
-			   session.put("uname", user.getUname());
-			return SUCCESS;
-		}
-		else return "fail";
+		
+			if(ud.isLagel(user)){
+				 Map session=ActionContext.getContext().getSession();
+				   session.put("uname", user.getUname());
+				   return SUCCESS;
+			}
+			return "fail";
+
 	}
 	public String addUser() throws Exception{
 		UserDao ud = new UserDaoImp();
@@ -40,8 +42,7 @@ public class CheckUser extends ActionSupport {
 		}
 		if(user.getUpass().isEmpty()){
 			addFieldError("user.upass","√ª”– ‰»Î√‹¬Î");
-		}		
-		
+		}	
 	}
 	
 }

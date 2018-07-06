@@ -31,6 +31,7 @@ public class HouseDao {
 				h.setPhone(rs.getString("phone"));
 				h.setRent(rs.getFloat("rent"));
 				h.setRoom(rs.getString("room"));
+				h.setPhotosUrl(rs.getString("photos"));
 				houses.add(h);
 			}
 		}
@@ -39,8 +40,8 @@ public class HouseDao {
 		
 	}
 	public boolean addHouse(House house) throws SQLException {
-		String sql = "insert into house(city,zone,room,area,mode,rent,description,phone,state)"+ 
-" values(?,?,?,?,?,?,?,?,0)";
+		String sql = "insert into house(city,zone,room,area,mode,rent,description,phone,state,uname)"+ 
+" values(?,?,?,?,?,?,?,?,0,?)";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, house.getCity().getName());
 		ps.setString(2, house.getZone().getName());
@@ -50,6 +51,7 @@ public class HouseDao {
 		ps.setFloat(6, house.getRent());
 		ps.setString(7, house.getDescription());
 		ps.setString(8, house.getPhone());
+		ps.setString(9, house.getOwner());
 		boolean issuc = ps.executeUpdate()>0;
 		ps.close();
 		return issuc ;
@@ -60,6 +62,7 @@ public class HouseDao {
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, uname);
 		ps.setInt(2, id);
+		
 		int row = ps.executeUpdate();
 		ps.close();
 		return row>0;
@@ -96,6 +99,8 @@ public class HouseDao {
 				h.setPhone(rs.getString("phone"));
 				h.setRent(rs.getFloat("rent"));
 				h.setRoom(rs.getString("room"));
+				h.setPhotosUrl(rs.getString("photos"));
+				
 			}
 		}
 		ps.close();
@@ -139,6 +144,7 @@ public class HouseDao {
 				h.setPhone(rs.getString("phone"));
 				h.setRent(rs.getFloat("rent"));
 				h.setRoom(rs.getString("room"));
+				h.setPhotosUrl(rs.getString("photos"));
 				houses.add(h);
 			}
 		}
@@ -163,6 +169,8 @@ public class HouseDao {
 				h.setPhone(rs.getString("phone"));
 				h.setRent(rs.getFloat("rent"));
 				h.setRoom(rs.getString("room"));
+				h.setPhotosUrl(rs.getString("photos"));
+				
 				int s = rs.getInt("state");
 				h.setState(0==s?"´ý³ö×â":"³ö×âÖÐ");
 				houses.add(h);
@@ -181,19 +189,24 @@ public class HouseDao {
 	}
 	public boolean updateHouse(House house) throws SQLException {
 		String sql = "update house set city=?,zone=?,room=?,"+""
-				+ "area=?,mode=?,rent=?,description=?,phone=? where hid=?";
-						PreparedStatement ps = con.prepareStatement(sql);
-						ps.setString(1, house.getCity().getName());
-						ps.setString(2, house.getZone().getName());
-						ps.setString(3, house.getRoom());
-						ps.setInt(4, house.getArea());
-						ps.setString(5, house.getMode());
-						ps.setFloat(6, house.getRent());
-						ps.setString(7, house.getDescription());
-						ps.setString(8, house.getPhone());
-						ps.setInt(9, house.getId());
-						boolean issuc = ps.executeUpdate()>0;
-						ps.close();
-						return issuc ;
+				+ "area=?,mode=?,rent=?,description=?,phone=?,photos=? where hid=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, house.getCity().getName());
+		ps.setString(2, house.getZone().getName());
+		ps.setString(3, house.getRoom());
+		ps.setInt(4, house.getArea());
+		ps.setString(5, house.getMode());
+		ps.setFloat(6, house.getRent());
+		ps.setString(7, house.getDescription());
+		ps.setString(8, house.getPhone());
+		ps.setString(9, house.getPhotosUrl());
+		
+		ps.setInt(10, house.getId());
+		
+		boolean issuc = ps.executeUpdate()>0;
+		ps.close();
+		return issuc ;
 	}
+
+	
 }

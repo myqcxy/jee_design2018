@@ -31,10 +31,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	String phone; -->
   <body><center>
 <s:debug/>
-     
+     <h3>请修改房屋信息</h3><br>
   <s:set var="area"
-   value="#{		'北京':{'北京'},	
-   					'郑州':{'高新区','中原区','金水区',''},
+   value="#{			'郑州':{'高新区','中原区','金水区'},
                      '天津':{'天津'},
                      '河北':{'石家庄','唐山','秦皇岛','邯郸','邢台','保定','张家口','承德','沧州','廊坊','衡水'},
                      '山西':{'太原','大同','阳泉','长治','晋城','朔州','晋中','运城','忻州','临汾','吕梁'},
@@ -69,7 +68,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                      '香港特别行政区':{'香港'},
                      '澳门特别行政区':{'澳门'}
                  }" />
-	<s:form name="addHouse" action="addHouse" method="post" enctype="multipart/form-data">
+	<s:form name="updateHouse" action="updateHouse" method="post" enctype="multipart/form-data">
+		<s:hidden name="house.id"></s:hidden>
 		<s:textfield name="house.mode" label="出租方式"/>
 		<s:textfield name="house.area" label="房屋面积（平米）"/>
 		<s:textfield name="house.room" label="厅室（例如：2室一厅）"/>
@@ -82,7 +82,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<s:file name="upload" label="file 1"/>
 	  	<s:file name="upload" label="file 2"/>
 	  	<s:file name="upload" label="file 3"/>
-		<s:submit value="确定出租"/>
+		  
+		<s:submit value="更新"/>
 	</s:form>
 	</center>
   </body>

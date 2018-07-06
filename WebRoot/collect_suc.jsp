@@ -23,6 +23,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-   <center>房屋收藏成功！等待租客来住......</center>
+   <center>房屋收藏成功！<a href="login_user_suc.jsp">返回</a></center>
   </body>
 </html>

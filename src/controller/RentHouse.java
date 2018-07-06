@@ -1,5 +1,7 @@
 package controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +17,27 @@ public class RentHouse extends ActionSupport {
 	List<House> houses;
 	House house;
 	String keyInfo;// ¼ìË÷ÐÅÏ¢
-
+	File [] upload;
+	String [] uploadContenType;
+	String [] uploadFileName;
+	public File[] getUpload() {
+		return upload;
+	}
+	public void setUpload(File[] upload) {
+		this.upload = upload;
+	}
+	public String[] getUploadContenType() {
+		return uploadContenType;
+	}
+	public void setUploadContenType(String[] uploadContenType) {
+		this.uploadContenType = uploadContenType;
+	}
+	public String[] getUploadFileName() {
+		return uploadFileName;
+	}
+	public void setUploadFileName(String[] uoloadFileName) {
+		this.uploadFileName = uoloadFileName;
+	}
 	public String getKeyInfo() {
 		return keyInfo;
 	}
@@ -40,7 +62,10 @@ public class RentHouse extends ActionSupport {
 		this.houses = houses;
 	}
 
-	public String addHouse() throws SQLException {
+	public String addHouse() throws SQLException, IOException {
+		Map session = ActionContext.getContext().getSession();
+		String uname = (String) session.get("uname");
+		house.setOwner(uname);
 		if (new HouseDao().addHouse(house)) {
 			return SUCCESS;
 		}
@@ -105,7 +130,17 @@ public class RentHouse extends ActionSupport {
 		}
 		return "fail";
 	}
-	public String updateHouse() throws SQLException{
+	public String updateHouse() throws SQLException, IOException{
+		Map session = ActionContext.getContext().getSession();
+		String uname = (String) session.get("uname");
+		IOUtils io = new IOUtils("photos/"+uname);
+		String urls = "";
+		for(int i=0;i<uploadFileName.length;i++){
+			urls += "photos/"+uname + "/" + uploadFileName[i];
+			
+		}
+		 io.filesCopy(upload, uploadFileName);
+		house.setPhotosUrl(urls);
 		if(new HouseDao().updateHouse(house)){
 			return SUCCESS;
 		}

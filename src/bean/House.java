@@ -12,9 +12,16 @@ public class House {
 	float rent;//租金
 	String description;//描述
 	String phone;//联系电话
-	List<String> photoUrl;//图片链接
+	String photosUrl;//图片链接
 	String state;
+	String owner;
 	
+	public String getOwner() {
+		return owner;
+	}
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
 	public String getState() {
 		return state;
 	}
@@ -77,10 +84,11 @@ public class House {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public List<String> getPhotoUrl() {
-		return photoUrl;
+	public String getPhotosUrl() {
+		return photosUrl;
 	}
-	public void setPhotoUrl(List<String> photoUrl) {
-		this.photoUrl = photoUrl;
+	public void setPhotosUrl(String photosUrl) {
+		this.photosUrl = photosUrl;
 	}
+	
 }
