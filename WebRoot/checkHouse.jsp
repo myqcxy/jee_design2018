@@ -29,12 +29,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	float rent;
 	String description;
 	String phone; -->
-  <body><center>
+  <body><center><a href="admin_home.jsp">返回</a>
 <s:debug/>
-	<a href="login_user_suc.jsp">返回我的主页</a>
-	 <table border="1" style="border:1px solid green"><tr><th>城市
-	 <th>区<th>厅室<th>面积（平米）<th>出租方式<th>租金<th>描述<th>电话<th>状态<th>action</tr>
-    <s:iterator value="houses" var="row">
+
+	<table border="1" style="border:1px solid green"><tr><th>城市
+	 <th>区<th>厅室<th>面积（平米）<th>出租方式<th>租金<th>描述<th>电话<th>状态<th>操作</tr>
+     <s:iterator value="houses" var="row">
     <tr>
     	<td><s:property value="#row.city.name"/>
     	<td><s:property value="#row.zone.name"/>
@@ -46,22 +46,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <td><s:property value="#row.phone"/>
       <td><s:property value="#row.state"/>
       <td>
-      <s:url var="editUrl" action="editHouse" >
+      <s:url var="passUrl" action="passCheckHouse" >
          <s:param name="house.id" value="#row.id"/>
       </s:url>
-      <a href="${editUrl}">修改</a>
+      <a href="${passUrl}">通过</a>
       
-    <s:url var="delUrl" action="delMyHouse" >
+    <!--   <td> -->
+      <%-- <s:url var="rentUrl" action="rentHouse" >
          <s:param name="house.id" value="#row.id"/>
       </s:url>
-      <a href="${delUrl}" onClick="return readyDel();">删除</a></tr>
+      <a href="${rentUrl}">收藏</a> --%>
+      <!-- <a href="" onClick="return readyDel() --><!-- ;">del</a> -->
       <tr><td colspan="10"><img alt="暂时没有图片" src="${row.photosUrl}"></tr>
     </s:iterator>
     </table></center>
-    <script>
-      function readyDel(){
-        return confirm("是否真的删除?");
-      }
-    </script>
   </body>
 </html>

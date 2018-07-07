@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
+    "http://struts.apache.org/dtds/struts-2.5.dtd">
+<struts>
+	
+	<package name="updateHouse" extends="struts-default">
+		<action name="addHouse" class="controller.UpdateHouse" method="addHouse">
+			<result>/house_add_suc.jsp</result>
+
+		</action>
+		
+		<action name="delMyHouse" class="controller.UpdateHouse" method="delMyHouse">
+			<result type="chain"><param name="actionName">myHouse</param>
+			<param name="namespace">/</param></result>
+			
+		</action>
+
+		<action name="updateHouse" class="controller.UpdateHouse"
+			method="updateHouse">
+			<result type="chain">
+			<param name="actionName">myHouse</param>
+			<param name="namespace">/</param>
+			</result>
+
+		</action>
+
+		<action name="editHouse" class="controller.UpdateHouse" method="editHouse">
+			<result>/editHouse.jsp</result>
+
+		</action>
+	</package>
+</struts>

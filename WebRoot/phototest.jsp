@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	String description;
 	String phone; -->
   <body><center>
-<s:debug/><img alt="test" src="D:\photos\zhangsan\test.jpg">
+<s:debug/><img alt="test" src="file:///D:/photos/zhangsan/test.jpg">
 	</center>
   </body>
 </html>

@@ -14,30 +14,12 @@ import bean.RentalInfo;
 import dao.HouseDao;
 
 public class RentHouse extends ActionSupport {
-	List<House> houses;
-	House house;
+	List<House> houses;// 房屋列表
+	House house;//房屋
 	String keyInfo;// 检索信息
-	File [] upload;
-	String [] uploadContenType;
-	String [] uploadFileName;
-	public File[] getUpload() {
-		return upload;
-	}
-	public void setUpload(File[] upload) {
-		this.upload = upload;
-	}
-	public String[] getUploadContenType() {
-		return uploadContenType;
-	}
-	public void setUploadContenType(String[] uploadContenType) {
-		this.uploadContenType = uploadContenType;
-	}
-	public String[] getUploadFileName() {
-		return uploadFileName;
-	}
-	public void setUploadFileName(String[] uoloadFileName) {
-		this.uploadFileName = uoloadFileName;
-	}
+
+	
+
 	public String getKeyInfo() {
 		return keyInfo;
 	}
@@ -62,19 +44,9 @@ public class RentHouse extends ActionSupport {
 		this.houses = houses;
 	}
 
-	public String addHouse() throws SQLException, IOException {
-		Map session = ActionContext.getContext().getSession();
-		String uname = (String) session.get("uname");
-		house.setOwner(uname);
-		if (new HouseDao().addHouse(house)) {
-			return SUCCESS;
-		}
-		return "fail";
-
-	}
 
 	public String collect() throws SQLException {
-		Map session = ActionContext.getContext().getSession();
+		Map<String, Object> session = ActionContext.getContext().getSession();
 		String uname = (String) session.get("uname");
 		if (new HouseDao().collect(uname, house.getId())) {
 			return SUCCESS;
@@ -89,12 +61,11 @@ public class RentHouse extends ActionSupport {
 	 * 
 	 */
 	public String rmCollection() throws SQLException {
-		Map session = ActionContext.getContext().getSession();
+		Map<String, Object> session = ActionContext.getContext().getSession();
 		String uname = (String) session.get("uname");
 
 		if (new HouseDao().rmCollection(house.getId(), uname)) {
 			return SUCCESS;
-
 		}
 		return "fail";
 	}
@@ -123,33 +94,7 @@ public class RentHouse extends ActionSupport {
 		return SUCCESS;
 	}
 
-	public String delMyHouse() throws SQLException {
-
-		if (new HouseDao().delMyHouse(house.getId())) {
-			return SUCCESS;
-		}
-		return "fail";
-	}
-	public String updateHouse() throws SQLException, IOException{
-		Map session = ActionContext.getContext().getSession();
-		String uname = (String) session.get("uname");
-		IOUtils io = new IOUtils("photos/"+uname);
-		String urls = "";
-		for(int i=0;i<uploadFileName.length;i++){
-			urls += "photos/"+uname + "/" + uploadFileName[i];
-			
-		}
-		 io.filesCopy(upload, uploadFileName);
-		house.setPhotosUrl(urls);
-		if(new HouseDao().updateHouse(house)){
-			return SUCCESS;
-		}
-		return "fail";
-	}
-	public String editHouse() throws SQLException{
-		house = new HouseDao().getHouseById(house.getId());
-		return SUCCESS;
-	}
+	
 	public String searchHouse() throws SQLException {
 		houses = new HouseDao().getHouseBySearch(keyInfo);
 		return SUCCESS;

@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	String description;
 	String phone; -->
   <body><center>
-<s:debug/><b>我的收藏如下：</b>
+<s:debug/><b>我的收藏如下：</b><a href="login_user_suc.jsp">返回我的主页</a>
 	 <table border="1" style="border:1px solid green"><tr><td>城市<td>区<td>厅室<td>面积（平米）<td>出租方式<td>租金<td>描述<td>电话<td>action
     <s:iterator value="houses" var="row">
     <tr>
@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <s:param name="house.id" value="#row.id"/>
       </s:url>
       <a href="${rmCollectUrl}">取消收藏</a>
-      
+      <tr><td colspan="10"><img alt="暂时没有图片" src="${row.photosUrl}"></tr>
       <!-- <a href="" onClick="return readyDel() --><!-- ;">del</a> -->
     </s:iterator>
     </table></center>

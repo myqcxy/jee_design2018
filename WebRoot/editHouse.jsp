@@ -79,9 +79,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   doubleName="house.zone.name"  doubleList="#area[top]" />
 		<s:textarea name="house.description" label="描述" 
 		 headerValue="----请选择----" emptyOption="true"/>
-		<s:file name="upload" label="file 1"/>
-	  	<s:file name="upload" label="file 2"/>
-	  	<s:file name="upload" label="file 3"/>
+		 <img alt="${house.photosUrl}" src="${house.photosUrl}">
+		<s:file name="upload" label="更新图片"/>
+	  <%-- 	<s:file name="upload" label="file 2"/>
+	  	<s:file name="upload" label="file 3"/> --%>
 		  
 		<s:submit value="更新"/>
 	</s:form>

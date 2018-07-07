@@ -1,9 +1,9 @@
 package bean;
 
 public class User {
-	String uname;
-	String uid;
-	String upass;
+	private String uname;
+	private String uid;
+	private String upass;
 	
 	public String getUname() {
 		return uname;

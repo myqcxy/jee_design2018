@@ -1,5 +1,4 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
-<%@ taglib prefix="s" uri="/struts-tags" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -25,8 +24,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  注册成功<center>
-    <s:property value="user.uname"/>(5秒跳转到登录界面)
-  </center>
+   <center>登录失败（5秒后重新登录）.....</center>
   </body>
 </html>

@@ -29,14 +29,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	float rent;
 	String description;
 	String phone; -->
-  <body><center>
+  <body><center><a href="login_user_suc.jsp">返回</a>
 <s:debug/>
 	<s:form action="searchHouse" method ="post">
 		<s:textfield name="keyInfo" label="筛选条件"/>
 		<s:submit value="搜索"/>
 	</s:form>
 	<table border="1" style="border:1px solid green"><tr><th>城市
-	 <th>区<th>厅室<th>面积（平米）<th>出租方式<th>租金<th>描述<th>电话<th>状态<th>action</tr>
+	 <th>区<th>厅室<th>面积（平米）<th>出租方式<th>租金<th>描述<th>电话<th>状态<th>操作</tr>
      <s:iterator value="houses" var="row">
     <tr>
     	<td><s:property value="#row.city.name"/>
@@ -46,7 +46,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <td><s:property value="#row.mode"/>
       <td><s:property value="#row.rent"/>
       <td><s:property value="#row.description"/>
-      <td><s:property value="#row.phone"/><td><s:property value="#row.id"/>
+      <td><s:property value="#row.phone"/>
+      <td><s:property value="#row.state"/>
       <td>
       <s:url var="collectUrl" action="collect" >
          <s:param name="house.id" value="#row.id"/>
@@ -59,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </s:url>
       <a href="${rentUrl}">收藏</a> --%>
       <!-- <a href="" onClick="return readyDel() --><!-- ;">del</a> -->
-      <tr><td colspan="10"><img alt="${row.photosUrl}" src="${row.photosUrl}"></tr>
+      <tr><td colspan="10"><img alt="暂时没有图片" src="${row.photosUrl}"></tr>
     </s:iterator>
     </table></center>
   </body>

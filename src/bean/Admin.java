@@ -1,9 +1,9 @@
 package bean;
 
 public class Admin {
-	String aname;
-	String aid;
-	String apass;
+	private String aname;
+	private String aid;
+	private String apass;
 	public String getAname() {
 		return aname;
 	}

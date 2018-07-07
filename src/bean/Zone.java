@@ -1,8 +1,8 @@
 package bean;
 
 public class Zone {
-	int id;
-	String name;
+	private int id;
+	private String name;
 	public Zone(int id, String name) {
 		this.id = id;
 		this.name = name;

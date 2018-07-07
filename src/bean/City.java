@@ -1,8 +1,8 @@
 package bean;
 
 public class City {
-	int id;
-	String name;
+	private int id;
+	private String name;
 	public City(int id, String name) {
 		this.id = id;
 		this.name = name;

@@ -4,81 +4,65 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.5//EN"
     "http://struts.apache.org/dtds/struts-2.5.dtd">
 <struts>
-	<constant name="struts.devMode" value="true" />	
-	 <package name="default" extends="struts-default">
-     <action name="checkAdmin" class="controller.CheckAdmin">
-       <result>/login_admin_suc.jsp</result>
-       <result name="fail">/login_admin_fail.jsp</result>
-       <result name="input">/login_admin.jsp</result>
-     </action>
-     <action name="rentHouse" class="controller.RentHouse">
-       <result>/show_house.jsp</result>
-       <result name="fail">/login_admin_fail.jsp</result>
-       <result name="input">/login_admin.jsp</result>
-     </action>
-     
-     <action name="collect" class="controller.RentHouse" method="collect">
-       <result>/collect_suc.jsp</result>
-       <result name="fail">/login_admin_fail.jsp</result>
-       <result name="input">/login_admin.jsp</result>
-     </action>
-      <action name="rmCollection" class="controller.RentHouse" method="rmCollection">
-       <result type="chain">myCollection</result>
-       <result name="fail">/login_admin_fail.jsp</result>
-       <result name="input">/login_admin.jsp</result>
-     </action>
-     
-     <action name="myCollection" class="controller.RentHouse" method="myCollection">
-       <result>/myCollection.jsp</result>
-       <result name="fail">/login_admin_fail.jsp</result>
-       <result name="input">/login_admin.jsp</result>
-     </action>
-     
-      <action name="addHouse" class="controller.RentHouse" method="addHouse">
-       <result type="chain">savePhoto</result>
-      
-     </action>
-     <action name="savePhoto" class="controller.SavePhoto">
-       <result>/house_add_suc.jsp</result>
-      
-     </action>
-     <action name="searchHouse" class="controller.RentHouse" method="searchHouse">
-       <result>/show_house.jsp</result>
-      
-     </action>
-     <action name="delMyHouse" class="controller.RentHouse" method="delMyHouse">
-       <result type="chain">myHouse</result>
-      
-     </action>
-     
-     <action name="updateHouse" class="controller.RentHouse" method="updateHouse">
-       <result type="chain">myHouse</result>
-      
-     </action>
-     
-     <action name="editHouse" class="controller.RentHouse" method="editHouse">
-       <result>/editHouse.jsp</result>
-      
-     </action>
-     <action name="myHouse" class="controller.RentHouse" method="myHouse">
-       <result>/myHouse.jsp</result>
-      
-     </action>
+	<constant name="struts.devMode" value="true" />
+	<package name="default" namespace="/" extends="struts-default">
+		<action name="checkAdmin" class="controller.CheckAdmin">
+			<result>/admin_home.jsp</result>
+			<result name="fail">/login_admin_fail.jsp</result>
+			<result name="input">/login_admin.jsp</result>
+		</action>
+		<action name="rentHouse" class="controller.RentHouse">
+			<result>/show_house.jsp</result>
+			<result name="fail">/login_admin_fail.jsp</result>
+			<result name="input">/login_admin.jsp</result>
+		</action>
 
-      <action name="checkUser" class="controller.CheckUser">
-       <result>/login_user_suc.jsp</result>
-       <result name="fail" >/login_user_fail.jsp</result>
-       <result name="input">/login_user.jsp</result>
-     </action>
-     <action name="addUser" class="controller.CheckUser" method="addUser">
-       <result>/user_add_suc.jsp</result>
-       <result name="fail" >/login_user_fail.jsp</result>
-       <result name="input">/login_user.jsp</result>
-     </action>
-    <action name="showPlace" class="controller.ShowPlace">
-       <result>/show_place.jsp</result>
-       <result name="fail">/login_admin_fail.jsp</result>
-       <result name="input">/login_admin.jsp</result>
-     </action>
-  </package>
+		<action name="collect" class="controller.RentHouse" method="collect">
+			<result>/collect_suc.jsp</result>
+			<result name="fail">/login_admin_fail.jsp</result>
+			<result name="input">/login_admin.jsp</result>
+		</action>
+		<action name="rmCollection" class="controller.RentHouse"
+			method="rmCollection">
+			<result type="chain">myCollection</result>
+			<result name="fail">/login_admin_fail.jsp</result>
+			<result name="input">/login_admin.jsp</result>
+		</action>
+
+		<action name="myCollection" class="controller.RentHouse"
+			method="myCollection">
+			<result>/myCollection.jsp</result>
+			<result name="fail">/login_admin_fail.jsp</result>
+			<result name="input">/login_admin.jsp</result>
+		</action>
+
+
+
+
+		<action name="searchHouse" class="controller.RentHouse" method="searchHouse">
+			<result>/show_house.jsp</result>
+
+		</action>
+		<action name="myHouse" class="controller.RentHouse" method="myHouse">
+			<result>/myHouse.jsp</result>
+
+		</action>
+
+		<action name="getCheckHouse" class="controller.CheckHouse" method="getCheckHouse">
+			<result>/checkHouse.jsp</result>
+
+		</action>
+		<action name="passCheckHouse" class="controller.CheckHouse" method="passCheckHouse">
+			<result type="chain">getCheckHouse</result>
+
+		</action>
+		<action name="showPlace" class="controller.ShowPlace">
+			<result>/show_place.jsp</result>
+			<result name="fail">/login_admin_fail.jsp</result>
+			<result name="input">/login_admin.jsp</result>
+		</action>
+	</package>
+	
+	<include file="user.xml"/>
+	<include file="updateHouse.xml"/>
 </struts>

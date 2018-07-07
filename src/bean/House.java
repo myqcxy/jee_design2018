@@ -2,19 +2,23 @@ package bean;
 
 import java.util.List;
 
+/**
+ * @author MYQ
+ *
+ */
 public class House {
-	int id;//房屋id
-	City city;//房屋所在城市
-	Zone zone;//房屋所在区
-	String room;//房屋厅室
-	int area;//房屋面积
-	String mode;//出租方式
-	float rent;//租金
-	String description;//描述
-	String phone;//联系电话
-	String photosUrl;//图片链接
-	String state;
-	String owner;
+	private int id;//房屋id
+	private City city;//房屋所在城市
+	private Zone zone;//房屋所在区
+	private String room;//房屋厅室
+	private int area;//房屋面积
+	private String mode;//出租方式
+	private float rent;//租金
+	private String description;//描述
+	private String phone;//联系电话
+	private String photosUrl;//图片链接
+	private String state;
+	private String owner;
 	
 	public String getOwner() {
 		return owner;
