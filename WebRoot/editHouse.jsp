@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	String description;
 	String phone; -->
   <body><center>
-<s:debug/>
+
      <h3>请修改房屋信息</h3><br>
   <s:set var="area"
    value="#{			'郑州':{'高新区','中原区','金水区'},

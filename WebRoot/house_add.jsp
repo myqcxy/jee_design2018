@@ -30,11 +30,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	String description;
 	String phone; -->
   <body><center>
-<s:debug/>
-     
+	<a href="login_user_suc.jsp">返回</a>
   <s:set var="area"
    value="#{		'北京':{'北京'},	
-   					'郑州':{'高新区','中原区','金水区',''},
+   					'郑州':{'高新区','中原区','金水区'},
                      '天津':{'天津'},
                      '河北':{'石家庄','唐山','秦皇岛','邯郸','邢台','保定','张家口','承德','沧州','廊坊','衡水'},
                      '山西':{'太原','大同','阳泉','长治','晋城','朔州','晋中','运城','忻州','临汾','吕梁'},

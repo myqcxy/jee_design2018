@@ -101,7 +101,7 @@ public class HouseDao {
 	 * @throws SQLException
 	 */
 	public List<House> getMyCollection(String uname) throws SQLException {
-		String sql = "select * from collect where uname=? and state!=10";
+		String sql = "select * from collect where uname=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		List<House> houses = new ArrayList<House>();
 		ps.setString(1, uname);
@@ -215,7 +215,7 @@ public class HouseDao {
 	 */
 	public List<House> getMyHouse(String uname) throws SQLException {
 		List<House> houses = new ArrayList<House>();
-		String sql = "select * from house where uname=? and state!=3  and state!=10";
+		String sql = "select * from house where uname=? and state!=3";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, uname);
 		try (ResultSet rs = ps.executeQuery();) {
@@ -235,6 +235,9 @@ public class HouseDao {
 				
 				int s = rs.getInt("state");
 				h.setState(0==s?"´ý³ö×â":"³ö×âÖÐ");
+				if(10==s){
+					h.setState("´ýÉóºË");
+				}
 				houses.add(h);
 			}
 		}

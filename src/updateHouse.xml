@@ -16,8 +16,11 @@
 			<param name="namespace">/</param></result>
 			
 		</action>
-
-		<action name="updateHouse" class="controller.UpdateHouse"
+		<action name="updateHouse" class="controller.SavePhoto">
+			<result type="chain">saveHouse</result>
+			
+		</action>
+		<action name="saveHouse" class="controller.UpdateHouse"
 			method="updateHouse">
 			<result type="chain">
 			<param name="actionName">myHouse</param>

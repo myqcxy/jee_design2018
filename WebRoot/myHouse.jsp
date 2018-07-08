@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	String description;
 	String phone; -->
   <body><center>
-<s:debug/>
+
 	<a href="login_user_suc.jsp">返回我的主页</a>
 	 <table border="1" style="border:1px solid green"><tr><th>城市
 	 <th>区<th>厅室<th>面积（平米）<th>出租方式<th>租金<th>描述<th>电话<th>状态<th>action</tr>
