@@ -36,10 +36,15 @@
 			<result name="input">/login_admin.jsp</result>
 		</action>
 
-
+	
 
 
 		<action name="searchHouse" class="controller.RentHouse" method="searchHouse">
+			<result>/show_house.jsp</result>
+
+		</action>
+		
+		<action name="seekHouse" class="controller.RentHouse" method="seekHouse">
 			<result>/show_house.jsp</result>
 
 		</action>
@@ -47,12 +52,28 @@
 			<result>/myHouse.jsp</result>
 
 		</action>
+		
+		<action name="searchPlace" class="controller.SearchPlace">
+			<result>/show_house.jsp</result>
 
+		</action>
+		<action name="searchRoom" class="controller.SearchRoom">
+			<result>/show_house.jsp</result>
+
+		</action>
+		<action name="searchMode" class="controller.SearchMode">
+			<result>/show_house.jsp</result>
+
+		</action>
 		<action name="getCheckHouse" class="controller.CheckHouse" method="getCheckHouse">
 			<result>/checkHouse.jsp</result>
 
 		</action>
 		<action name="passCheckHouse" class="controller.CheckHouse" method="passCheckHouse">
+			<result type="chain">getCheckHouse</result>
+
+		</action>
+		<action name="noPassCheckHouse" class="controller.CheckHouse" method="noPassCheckHouse">
 			<result type="chain">getCheckHouse</result>
 
 		</action>

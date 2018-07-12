@@ -24,6 +24,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-   <center>房屋添加成功！等待租客来住......</center>
+   <center>房屋添加成功！等待租客来住（5秒后跳转到我的房屋界面）......
+   
+   
+   </center>
   </body>
 </html>

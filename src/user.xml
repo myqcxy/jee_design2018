@@ -16,6 +16,12 @@
 			<result name="fail">/login_user_fail.jsp</result>
 			<result name="input">/login_user.jsp</result>
 		</action>
+		<action name="setlocation" class="controller.Setlocation">
+			<result>/login_user_suc.jsp</result>
+			<result name="fail">/setLocation.jsp</result>
+			<result name="input">/setLocation.jsp</result>
+		</action>
+		
 		<action name="logout" class="controller.Logout">
 			<result>/index.jsp</result>
 

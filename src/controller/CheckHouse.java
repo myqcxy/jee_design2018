@@ -38,4 +38,9 @@ public class CheckHouse extends ActionSupport {
 		return SUCCESS;
 		return "fail";
 	}
+	public String noPassCheckHouse() throws SQLException{
+		if(new HouseDao().noPassCheckHouse(house.getId()))
+		return SUCCESS;
+		return "fail";
+	}
 }

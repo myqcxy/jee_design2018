@@ -62,6 +62,13 @@ public class House {
 	public void setRent(float rent) {
 		this.rent = rent;
 	}
+	public void setRent(String rent) {
+		try{
+		this.rent = Float.parseFloat(rent);
+		}catch(Exception nfe){
+			this.rent=-1;
+		}
+	}
 	public String getPhone() {
 		return phone;
 	}
@@ -82,6 +89,13 @@ public class House {
 	public void setArea(int area) {
 		this.area = area;
 	}
+	/*public void setArea(String area) {
+		try{
+			this.area = (int)Integer.parseInt(area);
+			}catch(Exception nfe){
+				this.area=-1;
+			}
+	}*/
 	public String getDescription() {
 		return description;
 	}

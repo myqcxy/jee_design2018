@@ -10,15 +10,31 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import bean.House;
-import bean.RentalInfo;
 import dao.HouseDao;
 
 public class RentHouse extends ActionSupport {
 	List<House> houses;// 房屋列表
 	House house;//房屋
 	String keyInfo;// 检索信息
-
+	float higestPrice;
+	List<House> allhouses;
 	
+
+	public List<House> getAllhouses() {
+		return allhouses;
+	}
+
+	public void setAllhouses(List<House> allhouses) {
+		this.allhouses = allhouses;
+	}
+
+	public float getHigestPrice() {
+		return higestPrice;
+	}
+
+	public void setHigestPrice(float higestPrice) {
+		this.higestPrice = higestPrice;
+	}
 
 	public String getKeyInfo() {
 		return keyInfo;
@@ -99,7 +115,10 @@ public class RentHouse extends ActionSupport {
 		houses = new HouseDao().getHouseBySearch(keyInfo);
 		return SUCCESS;
 	}
-
+	public String seekHouse() throws SQLException {
+		houses = new HouseDao().getHouseBySeek(house);
+		return SUCCESS;
+	}
 	public String myHouse() throws SQLException {
 		Map session = ActionContext.getContext().getSession();
 		String uname = (String) session.get("uname");
@@ -109,7 +128,10 @@ public class RentHouse extends ActionSupport {
 
 	@Override
 	public String execute() throws Exception {
-		houses = new HouseDao().getAllHouse();
+		Map session = ActionContext.getContext().getSession();
+		String uname = (String) session.get("uname");//获取用户名
+		houses = new HouseDao().getAllHouseByRecommend(uname);//根据用户推荐
+		allhouses = new HouseDao().getAllHouse(uname);//获取所有房屋信息
 		return SUCCESS;
 	}
 

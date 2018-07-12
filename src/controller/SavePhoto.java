@@ -7,6 +7,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import bean.House;
+import dao.HouseDao;
 
 public class SavePhoto extends ActionSupport {
 	private House house;//房屋
@@ -55,6 +56,10 @@ public class SavePhoto extends ActionSupport {
 		IOUtils io = new IOUtils("photos/" + uname);
 		String urls = "";
 		//得到文件名，有可能为多个
+		if(uploadFileName==null){
+			house.setPhotosUrl(new HouseDao().getPhotoByHid(house.getId()));
+			return SUCCESS;
+		}
 		for (int i = 0; i < uploadFileName.length; i++) {
 			urls += "photos/" + uname + "/" + uploadFileName[i];
 			

@@ -10,7 +10,6 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import bean.House;
-import bean.RentalInfo;
 import dao.HouseDao;
 /*
  * 此类实现房屋的信息的增加、删除、修改以及得到需要编辑的房屋*/
@@ -39,12 +38,28 @@ public class UpdateHouse extends ActionSupport {
 		Map session = ActionContext.getContext().getSession();
 		String uname = (String) session.get("uname");
 		house.setOwner(uname);
-		if (new HouseDao().addHouse(house)) {//调用HouseDao中提供的访问数据库的方法
+		int id=new HouseDao().addHouse(house);
+		if (id>-1) {//调用HouseDao中提供的访问数据库的方法
+			house.setId(id);
 			return SUCCESS;
 		}
 		return "fail";
 
 	}
+	public String afterUpdateHouse() throws SQLException{
+		house = new HouseDao().getHouseById(house.getId());
+		return SUCCESS;
+	}
+	@Override
+	public void validate() {
+		if(house.getRent()==-1||house.getRent()<0){
+			addFieldError("house.rent","租金不合法");	
+		}
+		/*if(house.getArea()==-1||house.getArea()<0){
+			addFieldError("house.area","面积不合法");	
+		}*/
+	}
+
 	/**
 	 * 删除房屋，执行成功的话修改数据库并且返回SUCCESS，否侧返回fail
 	 */

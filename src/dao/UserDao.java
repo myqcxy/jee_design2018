@@ -5,5 +5,5 @@ import bean.*;
 public interface UserDao {
 	public boolean isLagel(User user)throws Exception;//验证登录是否合法
 	public boolean addUser(User user)throws Exception;//添加用户
-	
+	public boolean setlocation(String uname, String city,String zone)throws Exception;
 }

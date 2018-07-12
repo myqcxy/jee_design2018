@@ -7,26 +7,29 @@
 	
 	<package name="updateHouse" extends="struts-default">
 		<action name="addHouse" class="controller.UpdateHouse" method="addHouse">
-			<result>/house_add_suc.jsp</result>
-
+			<result type="chain">afterUpdateHouse</result>
+			<result name="input">/house_add.jsp</result>
 		</action>
 		
 		<action name="delMyHouse" class="controller.UpdateHouse" method="delMyHouse">
 			<result type="chain"><param name="actionName">myHouse</param>
-			<param name="namespace">/</param></result>
-			
+			<param name="namespace">/</param>
+			</result>	
+		</action>
+		<action name="afterUpdateHouse" class="controller.UpdateHouse" method="afterUpdateHouse">
+			<result>/afterUpdateHouse.jsp</result>	
 		</action>
 		<action name="updateHouse" class="controller.SavePhoto">
 			<result type="chain">saveHouse</result>
-			
+			<result name="input">/editHouse.jsp</result>
 		</action>
 		<action name="saveHouse" class="controller.UpdateHouse"
 			method="updateHouse">
 			<result type="chain">
-			<param name="actionName">myHouse</param>
-			<param name="namespace">/</param>
+			<param name="actionName">afterUpdateHouse</param>
+			
 			</result>
-
+			<result name="input">/editHouse.jsp</result>
 		</action>
 
 		<action name="editHouse" class="controller.UpdateHouse" method="editHouse">

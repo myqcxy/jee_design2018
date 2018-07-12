@@ -35,6 +35,7 @@ public class CheckUser extends ActionSupport {
 		return "addError";
 		
 	}
+	
 	@Override
 	public void validate() {
 		if(this.user.getUname().isEmpty()){

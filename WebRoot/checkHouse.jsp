@@ -30,10 +30,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	String description;
 	String phone; -->
   <body><center><a href="admin_home.jsp">返回</a>
-<s:debug/>
 
 	<table border="1" style="border:1px solid green"><tr><th>城市
-	 <th>区<th>厅室<th>面积（平米）<th>出租方式<th>租金<th>描述<th>电话<th>状态<th>操作</tr>
+	 <th>区<th>厅室<th>面积（平米）<th>出租方式<th>租金<th>上传者<th>描述<th>电话<th>状态<th>操作</tr>
      <s:iterator value="houses" var="row">
     <tr>
     	<td><s:property value="#row.city.name"/>
@@ -42,6 +41,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <td><s:property value="#row.area"/>
       <td><s:property value="#row.mode"/>
       <td><s:property value="#row.rent"/>
+      <td><s:property value="#row.owner"/>
+      
       <td><s:property value="#row.description"/>
       <td><s:property value="#row.phone"/>
       <td><s:property value="#row.state"/>
@@ -49,15 +50,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <s:url var="passUrl" action="passCheckHouse" >
          <s:param name="house.id" value="#row.id"/>
       </s:url>
+      <s:url var="nopassUrl" action="noPassCheckHouse" >
+         <s:param name="house.id" value="#row.id"/>
+      </s:url>
       <a href="${passUrl}">通过</a>
-      
+      <a href="${nopassUrl}">驳回</a>
+      <tr><td colspan="10"><img alt="暂时没有图片" src="${row.photosUrl}"></tr>
     <!--   <td> -->
       <%-- <s:url var="rentUrl" action="rentHouse" >
          <s:param name="house.id" value="#row.id"/>
       </s:url>
       <a href="${rentUrl}">收藏</a> --%>
       <!-- <a href="" onClick="return readyDel() --><!-- ;">del</a> -->
-      <tr><td colspan="10"><img alt="暂时没有图片" src="${row.photosUrl}"></tr>
+     
     </s:iterator>
     </table></center>
   </body>

@@ -36,5 +36,15 @@ public class UserDaoImp implements UserDao {
 		int cl = ps.executeUpdate();
 		return cl > 0;
 	}
+	@Override
+	public boolean setlocation(String uname, String city, String zone) throws Exception {
+		String sql  = "UPDATE USER SET city=?,zone=? where uname=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, city);
+		ps.setString(2,zone);
+		ps.setString(3,uname);
+		int cl = ps.executeUpdate();
+		return cl > 0;
+	}
 
 }

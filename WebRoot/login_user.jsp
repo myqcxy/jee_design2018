@@ -20,7 +20,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+<style>
+	body{
+	
+	background-size:100% 100%; 
+	background-attachment: 80%;
+	color:#0D2A49;
+	margin-left:60px;
+	}
+	a{
+	text-decoration:none ;
+	
+	}
+</style>
   </head>
   
   <body>

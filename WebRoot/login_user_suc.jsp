@@ -20,7 +20,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+<style>
+	body{
+	
+	background-size:100% 100%; 
+	background-attachment: 80%;
+	color:#0D2A49;
+	margin-left:60px;
+	}
+	a{
+	text-decoration:none ;
+	
+	}
+</style>
   </head>
   
   <body><center>
@@ -33,6 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <a href="house_add.jsp">我要提供租房</a><br><br>
     <a href="myCollection">我的收藏</a><br><br>
      <a href="myHouse">我的房屋</a><br><br>
+     <a href="setLocation.jsp">设置我的地址</a><br><br>
     </center>
   </body>
 </html>

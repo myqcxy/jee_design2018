@@ -22,7 +22,7 @@ public class HouseDao {
 	 * @return 所有的房屋信息
 	 * @throws SQLException
 	 */
-	public List<House> getAllHouse() throws SQLException{
+	public List<House> getAllHouse(String uname) throws SQLException{
 		//创建一个List<House>对象
 		List<House> houses = new ArrayList<House>();
 		//sql语句
@@ -53,16 +53,86 @@ public class HouseDao {
 		return houses;
 		
 	}
+	public List<House> getAllHouseByHot() throws SQLException{
+		//创建一个List<House>对象
+		List<House> houses = new ArrayList<House>();
+		//sql语句
+		String sql = "SELECT * FROM house "
+				+ "where city in (select city from user where uname=?) "
+				+ "and zone in (select zone from user where uname=?)"
+				+ " and state=0";
+		//使用PreparedStatement将SQL语句执行
+		PreparedStatement ps = con.prepareStatement(sql);
+		/*ps.setString(1, uname);
+		ps.setString(2, uname);*/
+		//逐个获取得到的结果
+		try (ResultSet rs = ps.executeQuery();) {
+			while(rs.next()){//如果还有house没有获取
 
+				House h = new House();
+				h.setId(rs.getInt("hid"));
+				h.setCity(new City(0,rs.getString("city")));
+				h.setZone(new Zone(0,rs.getString("zone")));
+				h.setArea(rs.getInt("area"));
+				h.setDescription(rs.getString("description"));
+				h.setMode(rs.getString("mode"));
+				h.setPhone(rs.getString("phone"));
+				h.setRent(rs.getFloat("rent"));
+				h.setRoom(rs.getString("room"));
+				h.setPhotosUrl(rs.getString("photos"));
+				int s = rs.getInt("state");
+				h.setState(0==s?"待出租":"出租中");
+				houses.add(h);
+			}
+		}
+		ps.close();//关闭ps
+		return houses;
+	}
+	public List<House> getAllHouseByRecommend(String uname) throws SQLException{
+		//创建一个List<House>对象
+				List<House> houses = new ArrayList<House>();
+				//sql语句
+				String sql = "SELECT * FROM house "
+						+ "where city in (select city from user where uname=?) "
+						+ "and zone in (select zone from user where uname=?)"
+						+ " and state=0";
+				//使用PreparedStatement将SQL语句执行
+				PreparedStatement ps = con.prepareStatement(sql);
+				ps.setString(1, uname);
+				ps.setString(2, uname);
+				//逐个获取得到的结果
+				try (ResultSet rs = ps.executeQuery();) {
+					while(rs.next()){//如果还有house没有获取
+
+						House h = new House();
+						h.setId(rs.getInt("hid"));
+						h.setCity(new City(0,rs.getString("city")));
+						h.setZone(new Zone(0,rs.getString("zone")));
+						h.setArea(rs.getInt("area"));
+						h.setDescription(rs.getString("description"));
+						h.setMode(rs.getString("mode"));
+						h.setPhone(rs.getString("phone"));
+						h.setRent(rs.getFloat("rent"));
+						h.setRoom(rs.getString("room"));
+						h.setPhotosUrl(rs.getString("photos"));
+						int s = rs.getInt("state");
+						h.setState(0==s?"待出租":"出租中");
+						houses.add(h);
+					}
+				}
+				ps.close();//关闭ps
+				return houses;
+	}
 	/**
 	 * @param house 待插入的House对象
 	 * @return 插入成功返回true，失败返回 false
 	 * @throws SQLException
 	 */
-	public boolean addHouse(House house) throws SQLException {
+	public int addHouse(House house) throws SQLException {
 		//sql语句
 		String sql = "insert into house(city,zone,room,area,mode,rent,description,phone,state,uname)"+ 
 " values(?,?,?,?,?,?,?,?,10,?)";
+		int id = -1;
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, house.getCity().getName());
 		ps.setString(2, house.getZone().getName());
@@ -73,9 +143,17 @@ public class HouseDao {
 		ps.setString(7, house.getDescription());
 		ps.setString(8, house.getPhone());
 		ps.setString(9, house.getOwner());
-		boolean issuc = ps.executeUpdate()>0;//存储执行结果
+		ps.executeUpdate();
+		sql = "SELECT max(hid)id FROM HOUSE";
+		ps = con.prepareStatement(sql);
+		try (ResultSet rs = ps.executeQuery();) {
+			if(rs.next()){//如果还有house没有获取
+				id = rs.getInt("id");
+			}
+		}
 		ps.close();
-		return issuc ;
+		
+		return id ;
 	}
 
 	/**
@@ -139,7 +217,11 @@ public class HouseDao {
 				h.setRoom(rs.getString("room"));
 				h.setPhotosUrl(rs.getString("photos"));
 				int s = rs.getInt("state");
-				h.setState(0==s?"待出租":"出租中");
+				String state="";
+				if(0==s) state="待出租";
+				else if(10==s) state="待审核";
+				
+				h.setState(state);
 			}
 		}
 		ps.close();
@@ -180,12 +262,22 @@ public class HouseDao {
 		keyInfo = "%" + keyInfo + "%";
 		List<House> houses = new ArrayList<House>();
 		String sql = "select * from house where (city like ? or zone like ?" + 
-						"or mode like ? or description like ?) and state!=3 and state!=10 ";
+						"or mode like ? or description like ?)"
+						 + 
+						" and state!=3 and state!=10 ";
+		/*String sql = "select * from house where (city like ? or zone like ?" + 
+				"or mode like ? or description like ?)"
+				+ "and mode=? and city=? and zone=? and room=?" + 
+				" and state!=3 and state!=10 ";*/
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, keyInfo);
 		ps.setString(2, keyInfo);
 		ps.setString(3, keyInfo);
 		ps.setString(4, keyInfo);
+		/*ps.setString(5, house.getMode());
+		ps.setString(6, house.getCity().getName());
+		ps.setString(7, house.getZone().getName());
+		ps.setString(8, house.getRoom());*/
 		try (ResultSet rs = ps.executeQuery();) {
 			while(rs.next()){
 
@@ -238,6 +330,9 @@ public class HouseDao {
 				if(10==s){
 					h.setState("待审核");
 				}
+				if(101==s){
+					h.setState("审核失败");
+				}
 				houses.add(h);
 			}
 		}
@@ -264,7 +359,7 @@ public class HouseDao {
 	 */
 	public boolean updateHouse(House house) throws SQLException {
 		String sql = "update house set city=?,zone=?,room=?,"+""
-				+ "area=?,mode=?,rent=?,description=?,phone=?,photos=? where hid=?";
+				+ "area=?,mode=?,rent=?,description=?,phone=?,photos=?,state=10 where hid=?";
 		PreparedStatement ps = con.prepareStatement(sql);
 		ps.setString(1, house.getCity().getName());
 		ps.setString(2, house.getZone().getName());
@@ -302,7 +397,8 @@ public class HouseDao {
 				h.setRent(rs.getFloat("rent"));
 				h.setRoom(rs.getString("room"));
 				h.setPhotosUrl(rs.getString("photos"));
-				
+				h.setOwner(rs.getString("uname"));
+				System.out.print(h.getOwner());
 				int s = rs.getInt("state");
 				h.setState(10==s?"待审核":"审核通过");
 				houses.add(h);
@@ -319,6 +415,147 @@ public class HouseDao {
 		ps.setInt(1, hid);
 		int row = ps.executeUpdate();
 		return row>0;
+	}
+
+	public boolean noPassCheckHouse(int id) throws SQLException {
+
+		String sql = "UPDATE HOUSE SET state=101 where hid=? ";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, id);
+		int row = ps.executeUpdate();
+		return row>0;
+	}
+
+	public String getPhotoByHid(int id) throws SQLException {
+		String sql = "SELECT photos FROM house where hid=?";
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setInt(1, id);
+		try (ResultSet rs = ps.executeQuery();) {
+			if(rs.next()){
+				return rs.getString("photos");
+			}
+		}
+		ps.close();
+		return "";
+	}
+	public List<House> getHouseBySeek(House house) throws SQLException {
+		List<House> houses = new ArrayList<House>();
+	
+		String sql = "select * from house where "
+				+ " mode=? and city=? and zone=? and room=?" + 
+				" and state=0 ";
+		PreparedStatement ps = con.prepareStatement(sql);
+	
+		ps.setString(1, house.getMode());
+		ps.setString(2, house.getCity().getName());
+		ps.setString(3, house.getZone().getName());
+		ps.setString(4, house.getRoom());
+		try (ResultSet rs = ps.executeQuery();) {
+			while(rs.next()){
+
+				House h = new House();
+				h.setId(rs.getInt("hid"));
+				h.setCity(new City(0,rs.getString("city")));
+				h.setZone(new Zone(0,rs.getString("zone")));
+				h.setArea(rs.getInt("area"));
+				h.setDescription(rs.getString("description"));
+				h.setMode(rs.getString("mode"));
+				h.setPhone(rs.getString("phone"));
+				h.setRent(rs.getFloat("rent"));
+				h.setRoom(rs.getString("room"));
+				h.setPhotosUrl(rs.getString("photos"));
+				int s = rs.getInt("state");
+				h.setState(0==s?"待出租":"出租中");
+				houses.add(h);
+			}
+		}
+		ps.close();
+		return houses;
+	}
+	public List<House> getHouseByPlace(String city, String zone) throws SQLException {
+		zone = "%" + zone + "%";
+		String sql = "select * from house where city=? and zone like ? and state=0";
+		List<House> houses = new ArrayList<House>();
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, city);
+		ps.setString(2,zone);
+		try (ResultSet rs = ps.executeQuery();) {
+			while(rs.next()){
+
+				House h = new House();
+				h.setId(rs.getInt("hid"));
+				h.setCity(new City(0,rs.getString("city")));
+				h.setZone(new Zone(0,rs.getString("zone")));
+				h.setArea(rs.getInt("area"));
+				h.setDescription(rs.getString("description"));
+				h.setMode(rs.getString("mode"));
+				h.setPhone(rs.getString("phone"));
+				h.setRent(rs.getFloat("rent"));
+				h.setRoom(rs.getString("room"));
+				h.setPhotosUrl(rs.getString("photos"));
+				int s = rs.getInt("state");
+				h.setState(0==s?"待出租":"出租中");
+				houses.add(h);
+			}
+		}
+		ps.close();
+		return houses;
+	}
+	public List<House> getHouseByRoom(String room) throws SQLException {
+		String sql = "select * from house where room=? and state=0";
+		List<House> houses = new ArrayList<House>();
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, room);
+	
+		try (ResultSet rs = ps.executeQuery();) {
+			while(rs.next()){
+
+				House h = new House();
+				h.setId(rs.getInt("hid"));
+				h.setCity(new City(0,rs.getString("city")));
+				h.setZone(new Zone(0,rs.getString("zone")));
+				h.setArea(rs.getInt("area"));
+				h.setDescription(rs.getString("description"));
+				h.setMode(rs.getString("mode"));
+				h.setPhone(rs.getString("phone"));
+				h.setRent(rs.getFloat("rent"));
+				h.setRoom(rs.getString("room"));
+				h.setPhotosUrl(rs.getString("photos"));
+				int s = rs.getInt("state");
+				h.setState(0==s?"待出租":"出租中");
+				houses.add(h);
+			}
+		}
+		ps.close();
+		return houses;
+	}
+	public List<House> getHouseByMode(String mode) throws SQLException {
+		String sql = "select * from house where mode=? and state=0";
+		List<House> houses = new ArrayList<House>();
+		PreparedStatement ps = con.prepareStatement(sql);
+		ps.setString(1, mode);
+	
+		try (ResultSet rs = ps.executeQuery();) {
+			while(rs.next()){
+
+				House h = new House();
+				h.setId(rs.getInt("hid"));
+				h.setCity(new City(0,rs.getString("city")));
+				h.setZone(new Zone(0,rs.getString("zone")));
+				h.setArea(rs.getInt("area"));
+				h.setDescription(rs.getString("description"));
+				h.setMode(rs.getString("mode"));
+				h.setPhone(rs.getString("phone"));
+				h.setRent(rs.getFloat("rent"));
+				h.setRoom(rs.getString("room"));
+				h.setPhotosUrl(rs.getString("photos"));
+				int s = rs.getInt("state");
+				h.setState(0==s?"待出租":"出租中");
+				houses.add(h);
+			}
+		}
+		ps.close();
+		return houses;
 	}
 
 	
