@@ -187,6 +187,8 @@ public class HouseDao {
 			while(rs.next()){
 				int hid = rs.getInt("hid");
 				House h = getHouseById(hid);
+				/*if(h.getState().equals("待审核"))
+					h.set*/
 				houses.add(h);
 			}
 		}
@@ -220,7 +222,7 @@ public class HouseDao {
 				String state="";
 				if(0==s) state="待出租";
 				else if(10==s) state="待审核";
-				
+				else if(3==s) state="房屋已经过期";
 				h.setState(state);
 			}
 		}
